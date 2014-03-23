@@ -5,7 +5,7 @@ Custom object equality matchers for use with **[Jasmine 2.0](http://jasmine.gith
 
 # Installing
 
-`bower install jasmine-promise-matchers --save`
+`bower install jasmine-object-matchers --save`
 
 # Documentation
 
