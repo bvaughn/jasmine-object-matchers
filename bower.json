@@ -1,6 +1,6 @@
 {
     "name": "jasmine-object-matchers",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "main": "dist/jasmine-object-matchers.js",
     "license": "MIT",
     "ignore": [
