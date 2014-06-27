@@ -2,6 +2,7 @@
     "name": "jasmine-object-matchers",
     "version": "0.0.2",
     "main": "dist/jasmine-object-matchers.js",
+    "license": "MIT",
     "ignore": [
         "source",
         "spec",
@@ -16,7 +17,6 @@
     ],
     "dependencies": {
       "angular": "~1.2.15",
-      "jquery": "1.9.1",
       "lodash": "2.2.1"
     },
     "devDependencies": {
