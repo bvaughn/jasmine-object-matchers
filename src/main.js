@@ -1,54 +1,58 @@
-JasmineObjectMatchers = {};
-
 /**
  * Matcher helpers for tests involving Objects.
  */
+JasmineObjectMatchers = {};
 
-JasmineObjectMatchers.toContainKeys =
-  function( object, keys ) {
-    var pass = true;
-    var message;
+JasmineObjectMatchers.toContainKeys = function(object, keys) {
+  var pass = true;
+  var message;
 
-    if ( !_.isArray( keys ) ) {
-      keys = _.keys(keys);
+  var objectKeysMap = {};
+  var key;
+
+  for (key in object) {
+    objectKeysMap[key] = object[key];
+  }
+
+  if (!(keys instanceof Array)) {
+    keys = Object.keys(keys);
+  }
+
+  for (var i = 0, length = keys.length; i < length; ++i) {
+    key = keys[i];
+
+    if (!objectKeysMap[key]) {
+      message = 'Expected object to contain key:' + key;
+      pass = false;
+      break;
     }
+  }
 
-    _.find(keys, function(key) {
-      if ( !_.has(object, key) ) {
-        message = 'Expected object to contain key:' + key;
-        pass = false;
-
-        return true;
-      }
-    });
-
-    return {
-      pass: pass,
-      message: message
-    };
+  return {
+    pass: pass,
+    message: message
   };
+};
 
-JasmineObjectMatchers.toContainValues =
-  function( actualObject, expectedObject ) {
-    var pass = true;
-    var message;
+JasmineObjectMatchers.toContainValues = function(actualObject, expectedObject) {
+  var pass = true;
+  var message;
 
-    _.find(
-      _.keys(expectedObject),
-      function(key) {
-        if ( actualObject[key] != expectedObject[key] ) {
-          message = 'Expected object to contain "' + expectedObject[key] + '" at "' + key + '" but contained "' + actualObject[key] + '"';
-          pass = false;
+  for (var key in expectedObject) {
+    if (actualObject[key] != expectedObject[key]) {
+      var expectedValue = expectedObject[key];
+      var actualValue = actualObject[key];
+      message = 'Expected object to contain "' + expectedValue + '" at "' + key + '" but was "' + actualValue + '"';
+      pass = false;
+      break;
+    }
+  }
 
-          return true;
-        }
-      });
-
-    return {
-      pass: pass,
-      message: message
-    };
+  return {
+    pass: pass,
+    message: message
   };
+};
 
 beforeEach(function() {
   jasmine.addMatchers({
